@@ -6,6 +6,7 @@ rag.py to turn retrieved chunks into a grounded answer.
 """
 
 import os
+import time
 
 from dotenv import load_dotenv
 from google import genai
@@ -26,12 +27,17 @@ def get_client():
     return _client
 
 
-def generate(prompt, system=None):
-    """Send prompt (+ optional system instruction) to Gemini, return response text."""
-    config = types.GenerateContentConfig(system_instruction=system) if system else None
-    response = get_client().models.generate_content(
-        model=MODEL,
-        contents=prompt,
-        config=config,
-    )
-    return response.text
+def generate(prompt, system=None, temperature=0.2, model=None, retries=4):
+    config = types.GenerateContentConfig(system_instruction=system, temperature=temperature)
+    client = get_client()
+    for attempt in range(retries):
+        try:
+            resp = client.models.generate_content(
+                model=model or MODEL, contents=prompt, config=config)
+            return (resp.text or "").strip()
+        except Exception as e:
+            is_rate_limit = "429" in str(e) or "RESOURCE_EXHAUSTED" in str(e).upper()
+            if is_rate_limit and attempt < retries - 1:
+                time.sleep(2 ** attempt)
+                continue
+            raise
