@@ -1,0 +1,21 @@
+# M3 datastore: Postgres 16 with pgvector pre-installed.
+# Credentials here are local-dev only and match DB_DSN in build_index.py.
+# Start:  docker compose up -d
+# Verify: docker compose exec postgres psql -U raguser -d ragdb -c "SELECT count(*) FROM chunks;"
+# Stop:   docker compose down        (add -v to also wipe the data volume)
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: rag_postgres
+    environment:
+      POSTGRES_USER: raguser
+      POSTGRES_PASSWORD: ragpass
+      POSTGRES_DB: ragdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - ragdata:/var/lib/postgresql/data
+
+volumes:
+  ragdata:
