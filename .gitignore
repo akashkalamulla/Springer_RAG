@@ -1,4 +1,19 @@
+# ── Secrets ──────────────────────────────────────────────
+# The API key lives here. If this line is missing, you leak your key.
 .env
+
+# ── Python ───────────────────────────────────────────────
 .venv/
+venv/
 __pycache__/
-*.pyc
+*.py[cod]
+*.egg-info/
+
+# ── Derived artifacts (rebuilt by build_index.py; don't version data) ──
+chunks.jsonl
+
+# ── Editor / OS ──────────────────────────────────────────
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
