@@ -74,13 +74,25 @@ def judge(question, answer_text, hits):
 
 def eval_faithfulness(rows):
     detail = []
+    api_errors = 0
     for r in rows:
-        answer_text, hits = answer(r["question"])   # the REAL pipeline output
-        detail.append({"question": r["question"], **judge(r["question"], answer_text, hits)})
+        try:
+            answer_text, hits = answer(r["question"])   # the REAL pipeline output
+            detail.append({"question": r["question"], **judge(r["question"], answer_text, hits)})
+        except Exception as e:
+            api_errors += 1
+            detail.append({
+                "question": r["question"],
+                "score": None,
+                "status": "api_error",
+                "error": str(e),
+            })
     scored = [d["score"] for d in detail if d.get("score") is not None]
     return {
         "mean": round(sum(scored) / len(scored), 3) if scored else None,
         "graded": len(scored),
+        "api_errors": api_errors,
+        "total": len(rows),
         "detail": detail,
     }
 
