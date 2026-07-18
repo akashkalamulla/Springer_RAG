@@ -1,0 +1,180 @@
+
+================================================================================
+Q1: In a hospital staff survey, how did workers' heat-related knowledge relate to their perceived heat stress?
+DOI: 10.1186/s12889-026-28452-4
+TITLE: Occupational heat stress in hospital settings: a combined assessment of staff perceptions and indoor climate to support heat action planning
+ABSTRACT: Background and aims Occupational heat stress in healthcare settings is an emerging public health concern, yet evidence on indoor heat exposure and perception in hospitals remains limited. This study assessed perceived occupational heat stress among hospital employees by integrating staff-reported he...
+
+================================================================================
+Q2: How did combining reminder methods affect young children's uptake of a seasonal vaccine in a primary care setting?
+DOI: 10.1186/s12889-026-27786-3
+TITLE: Effectiveness of a digital communication and active recall strategy to improve pediatric influenza vaccination in primary care: a prospective observational study
+ABSTRACT: Background Influenza remains a significant health problem in early childhood, with vaccination uptake still below optimal levels. This study assessed the effectiveness of a combined digital and active reminder intervention in promoting influenza vaccination among children aged 6 months to 6 years. M...
+
+================================================================================
+Q3: What kinds of technology have been studied for supporting physical health among university students?
+DOI: 10.1186/s12889-026-27773-8
+TITLE: How do digital technologies improve the physical health of higher education students? A systematic scoping review
+ABSTRACT: Background The rapid evolution of digital technologies (DT) has reshaped health education, ushering in a new era of learning accessibility and interactivity within higher education (HE). This progress has sparked a growing interest in leveraging digital tools, ranging from mobile applications and we...
+
+================================================================================
+Q4: How were health literacy and diet-related digital literacy assessed among adults in a large city-based study?
+DOI: 10.1186/s12889-026-27722-5
+TITLE: The relationship between digital healthy diet literacy, physical activity, and health literacy: a community-based study
+ABSTRACT: Background Health literacy and digital healthy diet literacy are increasingly recognized as important determinants of health behaviors. However, the relationship between these literacy domains and physical activity remains complex and not fully understood. This study aimed to examine the interrelati...
+
+================================================================================
+Q5: What factors were linked to tobacco use among men across a large group of African countries?
+DOI: 10.1186/s12889-026-27758-7
+TITLE: Determinants of tobacco use among men aged 15 to 59 in Sub Sahara Africa: a multilevel mixed effect logistic regression analysis
+ABSTRACT: Introduction Tobacco use is a significant public health problem in Sub Sahara Africa, and various demographic factors influence its prevalence. Understanding the prevalence and factors associated with tobacco use can inform targeted interventions. Hence, this study aimed to identify determinants of ...
+
+================================================================================
+Q6: How common were sleep problems among residents of a high-altitude city?
+DOI: 10.1186/s12889-026-27686-6
+TITLE: Analysis of sleep quality and its influencing factors among residents in Chengguan District of Lhasa
+ABSTRACT: Background The aim of this study was to assess the quality of sleep and its determinants among residents of the Chengguan District in Lhasa, to provide foundational evidence for future intervention studies targeting sleep disorders in high-altitude populations. Methods We conducted a cross-sectional...
+
+================================================================================
+Q7: What did interviews reveal about what encourages or discourages people from joining online prevention programs?
+DOI: 10.1186/s12889-026-28392-z
+TITLE: Motivating factors and possible barriers to participation in digital prevention courses of two statutory health insurance funds in Germany: a qualitative interview study
+ABSTRACT: Background Digital prevention courses offered by statutory health insurance funds in Germany represent a low-threshold opportunity to support health-promoting behaviors through pre-recorded, video-based programs focusing on exercise, nutrition, or stress management. However, little is known about in...
+
+================================================================================
+Q8: How do families in low-income urban neighborhoods make decisions about food?
+DOI: 10.1186/s12889-026-27778-3
+TITLE: ‘It is the mother who will prepare [the] food that the father and children will eat’: opportunities and constraints among household food preparers in urban slums in Nigeria
+ABSTRACT: Background In the context of urban slum settings in Africa, there is limited knowledge about how food preparers make decisions as to the types of meals they serve in their households. Understanding what goes into food preparers’ daily choices and the complexity of providing nutritious food in resour...
+
+================================================================================
+Q9: What did school staff and students think about lessons that incorporated physical activity?
+DOI: 10.1186/s12889-026-27718-1
+TITLE: Voices on a multicomponent school-based physical activity intervention: a qualitative study with school leaders, teachers, and students from the MOVESCHOOL study
+ABSTRACT: Background Adolescent physical inactivity is a global public health priority, and schools are identified as a critical setting for health promotion. While multicomponent “whole-school” interventions are recommended, there is a lack of qualitative evidence regarding their implementation and the exper...
+
+================================================================================
+Q10: Was where someone lived associated with their risk of being hospitalized for a respiratory illness?
+DOI: 10.1186/s12889-026-27732-3
+TITLE: California Healthy Places Index and COVID-19 hospitalization risk: a patient-level analysis
+ABSTRACT: Background Research has shown that inequalities in COVID-19 outcomes are influenced by individual-level characteristics and specific measures of neighborhood characteristics. Understanding the association between composite neighborhood-level social determinants of health, particularly newly develope...
+
+================================================================================
+Q11: How has inequality in teenagers' life satisfaction changed over time in a Scandinavian country?
+DOI: 10.1186/s12889-026-27695-5
+TITLE: Socioeconomic inequality in adolescent life satisfaction: temporal trends and age- and sex-specific patterns from the Norwegian Health Behaviour in School-aged Children surveys, 2002–2018
+ABSTRACT: Background Life satisfaction is a key outcome indicator of socioeconomic inequality during adolescence. While several countries report socioeconomic inequalities in adolescent life satisfaction, temporal trends and age- and sex-specific patterns remain unclear due to mixed results across national co...
+
+================================================================================
+Q12: What eating patterns were identified among adults in a national health survey?
+DOI: 10.1186/s12889-026-27737-y
+TITLE: Assessment of Serbian adults’ diet through cluster analysis approach – findings from the national health interview survey
+ABSTRACT: Background The study aimed to assess the diet of Serbian adults using a cluster analysis approach and to determine the association of socio-demographic and other characteristics with the membership to the identified dietary clusters. Methods This study represents a secondary analysis of data from th...
+
+================================================================================
+Q13: Do poverty, malnutrition, and infectious disease tend to cluster together geographically in one country?
+DOI: 10.1186/s12889-026-27677-7
+TITLE: Regional vulnerability assessment using poverty, undernutrition, and burden of infectious diseases in India: a spatial syndemic analysis
+ABSTRACT: Background Social determinants of health like poverty, undernutrition, and infectious diseases often co-exist in disadvantaged settings, integrating with each other and enhancing health vulnerability. These conditions have been studied separately in India; the limited evidence on their combined spat...
+
+================================================================================
+Q14: Does watching food content online affect how teenagers with excess weight eat?
+DOI: 10.1186/s12889-026-27753-y
+TITLE: From screens to snacks: social media exposure and food consumption triggers among overweight and obese adolescents – evidence from a cross-sectional, mixed-methods approach
+ABSTRACT: Background Exposure to food-related digital media has been recognized as a determinant of eating behavior, although this remains less known during adolescence, particularly among overweight and obese individuals. Our study aimed to analyze the influence of food-related digital media content on the e...
+
+================================================================================
+Q15: How were people's work situations tracked a year after recovering from a respiratory illness?
+DOI: 10.1186/s12889-026-26894-4
+TITLE: Work ability and work limitations in people recovering from COVID-19: one-year follow-up cohort results
+ABSTRACT: Background COVID-19 can have a large impact on people’s participation in work. The purpose of this article is to gain insight in characteristics of persons with COVID-19 at the time of infection, and their work ability and work limitations one year after inclusion in the allied health recovery care ...
+
+================================================================================
+Q16: Is there a relationship between how satisfied people are with their jobs and their work-life balance?
+DOI: 10.1186/s12889-026-26624-w
+TITLE: The relationship between job satisfaction and work life balance: a cross sectional study from Türkiye
+ABSTRACT: Background Given that many employees in Türkiye spend the majority of their time in the workplace and work extended hours, the relationship between work-life balance and job satisfaction warrants further in-depth investigation. The aim of the study is to examine the effect of job satisfaction of wor...
+
+================================================================================
+Q17: How thoroughly was the literature searched to study whether health-intervention studies report all their planned outcomes?
+DOI: 10.1186/s12889-026-27475-1
+TITLE: An investigation of discrepancies in outcome reporting and selective reporting bias in interrupted time series studies of health interventions: a methodological study
+ABSTRACT: Background Selective reporting bias occurs when authors report outcomes or results based on the P value, magnitude or direction of the results. Selective reporting has not been examined in interrupted time series (ITS) studies. Therefore, we investigated (1) discrepancies between outcomes specified ...
+
+================================================================================
+Q18: How willing were people living with HIV and high blood pressure to get their blood pressure checked regularly?
+DOI: 10.1186/s12889-026-27736-z
+TITLE: Uptake of community blood pressure monitoring and associated factors among people living with HIV and hypertension accessing care at selected HIV clinics in urban and peri-urban Uganda
+ABSTRACT: Introduction The World Health Organization recommends Community-based blood pressure monitoring (BPM) for diagnosis and management of hypertension. However, there is limited data on the uptake and factors associated with community BPM among people living with HIV (PLHIV) and hypertension in many low...
+
+================================================================================
+Q19: How do resilience and social support together relate to mental health outcomes among workers in the gaming industry?
+DOI: 10.1186/s12889-026-27684-8
+TITLE: Toward targeted mental health support: the (in)congruence effect of resilience and social support among casino employees in Macau
+ABSTRACT: Objective Based on Conservation of Resources (COR) theory, this study aimed to examine the (in)congruence effect of psychological resilience and social support on mental health outcomes (anxiety, depression, perceived stress) among Macau’s gaming industry employees, and to explore targeted public he...
+
+================================================================================
+Q20: Were greenery and travel patterns linked to the spread of a mosquito-borne disease in a Chinese city?
+DOI: 10.1186/s12889-026-27680-y
+TITLE: Street-view vegetation, human mobility, and dengue fever: context-dependent risk in urban green spaces
+ABSTRACT: Background The relationship between urban vegetation and dengue risk remains unclear, partly because most studies rely on static residential exposure and coarse greenness measures. This study examined how street-view vegetation and human mobility jointly influence neighborhood-level dengue risk in G...
+
+================================================================================
+Q21: What do college students know and believe about the health effects of tiny plastic particles?
+DOI: 10.1186/s12889-026-27743-0
+TITLE: Practice patterns and perceptions of UF students and medical trainees regarding microplastics: an in-depth discussion and survey report
+ABSTRACT: Background Microplastics are ubiquitous environmental contaminants with increasing evidence of human exposure and potential health effects. Given the scale of plastic production and consumption in the United States, understanding how young adults perceive and respond to microplastics is essential fo...
+
+================================================================================
+Q22: How is a research trial studying the effects of heat on pregnant women and their babies?
+DOI: 10.1186/s12889-026-28030-8
+TITLE: Investigating environmental heat exposure and its effects on maternal and fetal health in rural Northern Ghana (Physio-HeMAB Study): a study protocol for a cluster randomized trial
+ABSTRACT: Background Climate change increases the frequency and intensity of heat events. Previous studies have established a correlation between heat exposure and adverse pregnancy outcomes, including preterm birth, stillbirth, and other maternal and fetal health complications. However, evidence on the physi...
+
+================================================================================
+Q23: What share of older adults in a large health plan got vaccinated against seasonal flu?
+DOI: 10.1186/s12889-026-27741-2
+TITLE: Determinants of influenza vaccination uptake in older adults: findings from a retrospective cross-sectional study
+ABSTRACT: Objectives Influenza poses a serious health risk to older adults, and although annual vaccination is the most effective prevention, coverage in this population remains inconsistent. This study assessed influenza vaccination uptake and its predictors in this population. Methods A retrospective cross-...
+
+================================================================================
+Q24: Does the time since a woman's last breast screening relate to how advanced her cancer is at diagnosis?
+DOI: 10.1186/s12889-026-27731-4
+TITLE: Delayed mammography screening and advanced breast cancer: variation across age and income groups
+ABSTRACT: Background Regular screening mammography can detect breast cancer at an earlier stage, leading to better outcomes, including significantly improved survival rates and quality of life. However, the association between delayed mammography and the likelihood of advanced-stage breast cancer remains uncl...
+
+================================================================================
+Q25: How prevalent is tuberculosis among incarcerated populations, and what predicts a positive test result?
+DOI: 10.1186/s12889-026-27643-3
+TITLE: Interferon gamma release assay and sputum GeneXpert positivity for tuberculosis burden detection in people deprived of liberty in Brazil: a cross-sectional study
+ABSTRACT: Background Globally tuberculosis disease (TB) poses a significant public health challenge. People deprived of liberty (PDL) are one of the most affected. This study aims to evaluate the positivity of interferon gamma release assay (IGRA) and molecular sputum testing for TB through a multicenter surv...
+
+================================================================================
+Q26: How did family dynamics at home shape children's access to food during a pandemic lockdown?
+DOI: 10.1186/s12889-026-27594-9
+TITLE: Children’s diet quality: a mixed methods study on the role of domestic food environments in influencing food access during the COVID-19 lockdown in Chile
+ABSTRACT: Background Households with lower socioeconomic status often have access to diets of poorer quality. However, even within the same socioeconomic group, intrahousehold dynamics influence food acquisition and influence children’s diet quality. This study investigated how these dynamics influenced food ...
+
+================================================================================
+Q27: How do city officials view the way emergency responders handle substance-use crises?
+DOI: 10.1186/s12889-026-27744-z
+TITLE: Access to non-police crisis response for people who use drugs: lessons from community safety response programs in two U.S. cities
+ABSTRACT: Introduction Community Safety Response (CSR) programs increasingly provide non-police alternatives to behavioral health crises, but their role in addressing substance use calls remains poorly understood. This qualitative study examined how municipal stakeholders in Denver, Colorado and San Francisco...
+
+================================================================================
+Q28: How have substance use and addictive behaviors changed over time among adolescents in a North African country?
+DOI: 10.1186/s12889-026-26740-7
+TITLE: A twenty-year retrospective analysis of substance use with recent behavioral addiction indicators (social media, gaming, gambling) among school-going adolescents in Morocco
+ABSTRACT: Background Adolescence is a critical period for the initiation of substance use and other addictive behaviors, which can have long-term health consequences. Monitoring these behaviors is essential to inform prevention and policy strategies in low- and middle-income countries, where evidence remains ...
+
+================================================================================
+Q29: How are mortality trends linked to substance use expected to change in the coming years?
+DOI: 10.1186/s12889-026-27568-x
+TITLE: Alcohol- and Drug-Induced Mortality Trends By Sex and Race Among U.S. Decedents with Liver disease (1999–2043)
+ABSTRACT: Background Liver disease–associated mortality in the United States has been rising, and substance-related deaths are an increasing part of this burden. We evaluated long-term national trends in alcohol- and drug-induced mortality among decedents with liver disease and assessed differences by sex and...
+
+================================================================================
+Q30: What did a study find when using participatory teaching methods for nutrition education, and what challenges came up when interviewing children?
+DOI: 10.1186/s12889-026-27752-z
+TITLE: Participatory methodologies in food and nutrition education: perceptions of healthy habits and eating behavior in children and their families
+ABSTRACT: Background Food and Nutrition Education (FNE) is a continuous process that promotes healthy eating habits through the development of knowledge and skills that support critical and autonomous food choices. However, traditional information-based approaches remain predominant and have shown limited eff...

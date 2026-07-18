@@ -1,10 +1,3 @@
-"""
-llm.py — M5 (generate). Thin wrapper around the Gemini API.
-
-Loads GEMINI_API_KEY from .env and exposes generate(prompt, system=...), used by
-rag.py to turn retrieved chunks into a grounded answer.
-"""
-
 import os
 import time
 
