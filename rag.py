@@ -16,10 +16,7 @@ from pgvector.psycopg import register_vector
 from sentence_transformers import SentenceTransformer
 
 from llm import generate
-
-DB_DSN = "host=localhost dbname=ragdb user=raguser password=ragpass port=5432"
-EMBED_MODEL = "all-MiniLM-L6-v2"   # MUST match build_index.py
-TOP_K = 5
+from settings import DB_DSN, EMBED_MODEL, TOP_K, RRF_K
 
 PROMPT_SYSTEM = (
     "You are a research assistant. Answer the question using ONLY the "
@@ -63,9 +60,6 @@ def retrieve(query, k=TOP_K):
     rows = [dict(zip(cols, r)) for r in cur.fetchall()]
     conn.close()
     return rows
-
-
-RRF_K = 60   # standard RRF constant; do not tune before seeing the honest default
 
 
 def retrieve_bm25(query, k=TOP_K):

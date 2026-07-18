@@ -2,7 +2,7 @@
 Idempotent. Does NOT touch embeddings or row count — pure additive column."""
 import psycopg
 
-DB_DSN = "host=localhost dbname=ragdb user=raguser password=ragpass port=5432"
+from settings import DB_DSN
 
 conn = psycopg.connect(DB_DSN)
 cur = conn.cursor()

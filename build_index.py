@@ -28,11 +28,10 @@ from sentence_transformers import SentenceTransformer
 import psycopg
 from pgvector.psycopg import register_vector
 
+from settings import DB_DSN, EMBED_MODEL, EMBED_DIM
+
 TARGET_TOKENS = 200            # stay under MiniLM's 256-token window
 MODEL_WINDOW = 256             # all-MiniLM-L6-v2 hard input limit
-EMBED_MODEL = "all-MiniLM-L6-v2"
-EMBED_DIM = 384                # frozen: this is the pgvector column width in M3
-DB_DSN = "host=localhost dbname=ragdb user=raguser password=ragpass port=5432"              # frozen: this is the pgvector column width in M3
 
 
 def approx_tokens(text: str) -> int:
