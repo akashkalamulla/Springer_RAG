@@ -16,7 +16,7 @@ wrong and are the actual learning:
    input at 256 tokens. A 500-token chunk gets half-ignored in the vector. So we
    target ~200 tokens/chunk — under the 256 ceiling with headroom.
 
-Usage:  python build_index.py path/to/journal.json
+Usage:  python build_index.py path/to/journal.json [path/to/journal2.json ...]
 """
 
 import json
@@ -212,11 +212,17 @@ def store_chunks(articles, all_chunks, vecs):
 
 
 def main():
-    if len(sys.argv) < 2:
-        raise SystemExit("usage: python build_index.py path/to/journal.json")
-
-    src = Path(sys.argv[1])
-    articles = json.loads(src.read_text(encoding="utf-8"))
+    paths = sys.argv[1:]
+    if not paths:
+        raise SystemExit("usage: python build_index.py anchor.json [issue2.json ...]")
+    articles, seen = [], set()
+    for p in paths:
+        for a in json.loads(Path(p).read_text(encoding="utf-8")):
+            doi = a.get("doi", "")
+            if doi and doi not in seen:
+                seen.add(doi)
+                articles.append(a)
+    print(f"loaded {len(articles)} unique-DOI articles from {len(paths)} file(s)")
 
     all_chunks = []
     for a in articles:
@@ -225,7 +231,7 @@ def main():
             c["chunk_id"] = f"{c['doi']}::{i}"   # stable, DOI-scoped
         all_chunks += cs
 
-    out = src.parent / "chunks.jsonl"
+    out = Path(paths[0]).parent / "chunks.jsonl"
     with out.open("w", encoding="utf-8") as f:
         for c in all_chunks:
             f.write(json.dumps(c, ensure_ascii=False) + "\n")

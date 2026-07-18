@@ -166,7 +166,7 @@ def read_urls(file_path="urlDetails.txt"):
         raise Exception(f"Error reading urlDetails.txt file: {e}")
 
 
-def create_json_path(output_folder, journal_title):
+def create_json_path(output_folder, journal_title, suffix=""):
     now = datetime.now()
     timestamp = now.strftime("%Y%m%d%H%M%S")
 
@@ -182,7 +182,7 @@ def create_json_path(output_folder, journal_title):
     journal_folder = os.path.join(output_folder, safe_title)
     os.makedirs(journal_folder, exist_ok=True)
 
-    filename = f"{safe_title}_{timestamp}.json"
+    filename = f"{safe_title}_{timestamp}{suffix}.json"
     json_file = os.path.join(journal_folder, filename)
 
     return json_file
@@ -1067,35 +1067,47 @@ def process_url(url, output_folder):
     if journal_title is None or journal_title == "":
         journal_title = ""
 
-    out_json_file = create_json_path(output_folder, journal_title)
+    NUM_ISSUES = int(os.environ.get("NUM_ISSUES", "1"))
 
     issue_link = second_soup.find("ul", attrs={"data-test": "volumes-and-issues"})
 
     if issue_link:
-        try:
-            current_link_tag = issue_link.find("li", class_="c-list-group__item")
-            current_link_href = current_link_tag.find("a")["href"]
-            current_link = urljoin(base_url, current_link_href)
-            print(f"✅ Current issue link found: {current_link}")
-        except Exception as e:
+        issue_link_tags = issue_link.find_all("li", class_="c-list-group__item")[:NUM_ISSUES]
+        if not issue_link_tags:
             raise Exception("No link for current issue")
     else:
         raise Exception("No links for issue")
 
-    issue_details["issue_url"] = current_link
-    articles_soup = get_soup(current_link, session)
-    issue_details["volume"], issue_details["issue"] = extract_volume_and_issue(articles_soup)
-    issue_details["publication_year"] = extract_publication_year(articles_soup)
+    total_issues = len(issue_link_tags)
+    for issue_num, link_tag in enumerate(issue_link_tags, start=1):
+        try:
+            current_link_href = link_tag.find("a")["href"]
+            current_link = urljoin(base_url, current_link_href)
+            print(f"✅ Issue {issue_num}/{total_issues} link found: {current_link}")
 
-    editors = get_editors_details(articles_soup)
+            this_issue_details = dict(issue_details)
+            this_issue_details["issue_url"] = current_link
+            articles_soup = get_soup(current_link, session)
+            this_issue_details["volume"], this_issue_details["issue"] = extract_volume_and_issue(articles_soup)
+            this_issue_details["publication_year"] = extract_publication_year(articles_soup)
 
-    all_items = get_article_content(current_link, session)
+            editors = get_editors_details(articles_soup)
 
-    if not all_items:
-        raise Exception("No articles for current issue")
+            all_items = get_article_content(current_link, session)
 
-    print("✅ Found all article links")
-    article_process(all_items, issue_details, editors, out_json_file, session)
+            if not all_items:
+                print(f"⚠️ No articles for issue {issue_num}, skipping")
+                continue
+
+            print("✅ Found all article links")
+            out_json_file = create_json_path(output_folder, journal_title, suffix=f"_issue{issue_num}")
+            article_process(all_items, this_issue_details, editors, out_json_file, session)
+        except Exception as e:
+            log_err("process_url(issue loop)", e)
+            logging.error(f"Error processing issue {issue_num}/{total_issues} at {url}: {e}")
+
+        if issue_num < total_issues:
+            time.sleep(random.uniform(*DELAY_BETWEEN_ARTICLES))
 
 
 def main():
