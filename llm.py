@@ -9,12 +9,11 @@ import os
 import time
 
 from dotenv import load_dotenv
-from google import genai
-from google.genai import types
+from openai import OpenAI, RateLimitError, InternalServerError, APIConnectionError
 
 load_dotenv()
 
-MODEL = "gemini-3.5-flash"
+MODEL = "gpt-4o-mini"
 
 _client = None
 
@@ -22,22 +21,28 @@ _client = None
 def get_client():
     global _client
     if _client is None:
-        api_key = os.environ["GEMINI_API_KEY"]
-        _client = genai.Client(api_key=api_key)
+        _client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
     return _client
 
 
+
 def generate(prompt, system=None, temperature=0.2, model=None, retries=4):
-    config = types.GenerateContentConfig(system_instruction=system, temperature=temperature)
+    messages = []
+    if system:
+        messages.append({"role": "system", "content": system})
+    messages.append({"role": "user", "content": prompt})
+
     client = get_client()
     for attempt in range(retries):
         try:
-            resp = client.models.generate_content(
-                model=model or MODEL, contents=prompt, config=config)
-            return (resp.text or "").strip()
-        except Exception as e:
-            is_rate_limit = "429" in str(e) or "RESOURCE_EXHAUSTED" in str(e).upper()
-            if is_rate_limit and attempt < retries - 1:
+            resp = client.chat.completions.create(
+                model=model or MODEL,
+                messages=messages,
+                temperature=temperature,
+            )
+            return (resp.choices[0].message.content or "").strip()
+        except (RateLimitError, InternalServerError, APIConnectionError):
+            if attempt < retries - 1:
                 time.sleep(2 ** attempt)
                 continue
             raise

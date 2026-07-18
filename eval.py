@@ -1,18 +1,3 @@
-"""
-eval.py — M6. Scores the RAG pipeline against golden_set.jsonl.
-
-Two independent halves:
-  RETRIEVAL    hit@k / MRR. LOCAL ONLY — MiniLM + pgvector, no LLM call.
-               Runs even when the generation model is down.
-  FAITHFULNESS is the generated answer grounded in the retrieved context? Uses
-               the generation model to answer, then a DIFFERENT model to judge —
-               a model grading its own output inflates the score.
-
-Usage:
-  python eval.py --retrieval-only     # no LLM; use during a model outage
-  python eval.py                      # full: retrieval + faithfulness
-"""
-
 import argparse
 import json
 
@@ -22,7 +7,7 @@ from llm import generate
 GOLDEN = "golden_set.jsonl"
 TOP_K = 5
 MIN_QUESTIONS = 15                        # refuse to score a placeholder set
-JUDGE_MODEL = "gemini-2.5-pro"            # MUST differ from the Flash generator
+JUDGE_MODEL = "gpt-4o"             # MUST differ from the Flash generator
 
 
 def load_golden(path=GOLDEN):
