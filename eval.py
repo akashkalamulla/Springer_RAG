@@ -102,9 +102,11 @@ def main():
         return
 
     ff = eval_faithfulness(rows)
-    print(f"\nFAITHFULNESS  mean={ff['mean']}  (graded {ff['graded']}/{len(rows)})")
+    print(f"\nFAITHFULNESS  mean={ff['mean']}  (graded {ff['graded']}/{len(rows)}, {ff['api_errors']} API errors)")
     for d in ff["detail"]:
-        if d.get("unsupported"):
+        if d.get("status") == "api_error":
+            print(f"  API ERROR: {d['question'][:50]}  ->  {d['error']}")
+        elif d.get("unsupported"):
             print(f"  {d['question'][:60]}  score={d.get('score')}  unsupported={d['unsupported']}")
 
 
