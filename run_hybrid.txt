@@ -1,0 +1,12 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[retriever: HYBRID]
+EASY  30q / 30 DOIs
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|##########| 103/103 [00:00<00:00, 8528.54it/s]
+  hit@1=1.0  hit@3=1.0  hit@5=1.0  mrr=1.0
+
+HARD  30q / 30 DOIs
+  hit@1=0.967  hit@3=1.0  hit@5=1.0  mrr=0.983
+
+FAITHFULNESS(easy)  mean=1.0  graded=30/30  errs=0
+
+REFUSAL  correct=1.0  n=10  errs=0

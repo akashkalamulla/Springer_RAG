@@ -65,6 +65,56 @@ def retrieve(query, k=TOP_K):
     return rows
 
 
+RRF_K = 60   # standard RRF constant; do not tune before seeing the honest default
+
+
+def retrieve_bm25(query, k=TOP_K):
+    """Lexical top-k via Postgres full-text (ts_rank over the GIN index). Same
+    row shape as retrieve(), with bm25_rank in place of cosine_sim."""
+    conn = psycopg.connect(DB_DSN)
+    cur = conn.cursor()
+    cur.execute("""
+        SELECT c.chunk_id, c.doi, a.title, c.section_title, c.text, c.cited_refs,
+               ts_rank(c.tsv, plainto_tsquery('english', %s)) AS bm25_rank
+        FROM chunks c
+        JOIN articles a ON a.doi = c.doi
+        WHERE c.tsv @@ plainto_tsquery('english', %s)
+        ORDER BY bm25_rank DESC
+        LIMIT %s;
+    """, (query, query, k))
+    cols = [d.name for d in cur.description]
+    rows = [dict(zip(cols, r)) for r in cur.fetchall()]
+    conn.close()
+    return rows
+
+
+def retrieve_hybrid(query, k=TOP_K, pool=20):
+    """Reciprocal Rank Fusion of vector and BM25 rankings.
+
+    Pull a wider pool from each retriever (default 20), score each chunk by
+    sum(1 / (RRF_K + rank)) across the lists it appears in, return top-k. Row
+    shape matches retrieve(): keeps chunk_id/doi/title/section_title/text/
+    cited_refs, plus rrf_score. Downstream (answer(), eval) is unchanged.
+    """
+    vec = retrieve(query, pool)
+    bm = retrieve_bm25(query, pool)
+
+    scores, meta = {}, {}
+    for lst in (vec, bm):
+        for rank, row in enumerate(lst, start=1):
+            cid = row["chunk_id"]
+            scores[cid] = scores.get(cid, 0.0) + 1.0 / (RRF_K + rank)
+            meta.setdefault(cid, row)   # first occurrence carries the fields
+
+    fused = sorted(scores.items(), key=lambda kv: kv[1], reverse=True)[:k]
+    out = []
+    for cid, s in fused:
+        row = dict(meta[cid])
+        row["rrf_score"] = round(s, 6)
+        out.append(row)
+    return out
+
+
 def build_prompt(query, hits):
     blocks = []
     for h in hits:
@@ -73,9 +123,9 @@ def build_prompt(query, hits):
     return f"CONTEXT:\n{context}\n\nQUESTION: {query}\n\nANSWER:"
 
 
-def answer(query, k=TOP_K):
+def answer(query, k=TOP_K, retriever=retrieve):
     """Retrieve, then generate a grounded answer. Returns (text, hits)."""
-    hits = retrieve(query, k)
+    hits = retriever(query, k)
     text = generate(build_prompt(query, hits), system=PROMPT_SYSTEM)
     return text, hits
 

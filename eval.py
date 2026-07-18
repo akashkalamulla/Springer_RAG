@@ -2,7 +2,7 @@ import argparse
 import json
 import os
 
-from rag import retrieve, answer          # reuse the real pipeline, don't fork it
+from rag import retrieve, retrieve_hybrid, answer   # reuse the real pipeline, don't fork it
 from llm import generate
 
 GOLDEN = "golden_set.jsonl"
@@ -26,12 +26,12 @@ def load_golden(path=GOLDEN):
     return rows
 
 
-def eval_retrieval(rows, max_k=5):
+def eval_retrieval(rows, max_k=5, retriever=retrieve):
     """Local only. Retrieve once at max_k; compute hit@1/@3/@5 and MRR."""
     hit1 = hit3 = hit5 = 0
     ranks, misses = [], []
     for r in rows:
-        dois = [h["doi"] for h in retrieve(r["question"], max_k)]
+        dois = [h["doi"] for h in retriever(r["question"], max_k)]
         tgt = r["answer_doi"]
         if tgt in dois:
             rank = dois.index(tgt) + 1
@@ -78,12 +78,12 @@ def judge(question, answer_text, hits):
         return {"score": None, "unsupported": ["judge did not return valid JSON"]}
 
 
-def eval_faithfulness(rows):
+def eval_faithfulness(rows, retriever=retrieve):
     detail = []
     api_errors = 0
     for r in rows:
         try:
-            answer_text, hits = answer(r["question"])   # the REAL pipeline output
+            answer_text, hits = answer(r["question"], retriever=retriever)   # the REAL pipeline output
             detail.append({"question": r["question"], **judge(r["question"], answer_text, hits)})
         except Exception as e:
             api_errors += 1
@@ -120,12 +120,12 @@ def classify_refusal(answer_text):
         return None
 
 
-def eval_refusal(rows):
+def eval_refusal(rows, retriever=retrieve):
     """Out-of-corpus questions the system SHOULD refuse. Score = correct / total."""
     correct, api_errors, detail = 0, 0, []
     for r in rows:
         try:
-            answer_text, _ = answer(r["question"])
+            answer_text, _ = answer(r["question"], retriever=retriever)
             refused = classify_refusal(answer_text)
             ok = refused is True
             correct += int(ok)
@@ -150,17 +150,22 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--retrieval-only", action="store_true",
                     help="skip faithfulness + refusal (no LLM)")
+    ap.add_argument("--hybrid", action="store_true",
+                    help="use RRF hybrid (BM25 + vector) retrieval")
     args = ap.parse_args()
+    R = retrieve_hybrid if args.hybrid else retrieve
+    tag = "HYBRID" if args.hybrid else "VECTOR"
+    print(f"[retriever: {tag}]")
 
     easy = load_golden()
     print(f"EASY  {len(easy)}q / {len(set(r['answer_doi'] for r in easy))} DOIs")
-    e = eval_retrieval(easy)
+    e = eval_retrieval(easy, retriever=R)
     print(f"  hit@1={e['hit@1']}  hit@3={e['hit@3']}  hit@5={e['hit@5']}  mrr={e['mrr']}")
 
     hard = load_set(HARD, MIN_QUESTIONS, "paraphrased questions")
     if hard:
         print(f"\nHARD  {len(hard)}q / {len(set(r['answer_doi'] for r in hard))} DOIs")
-        h = eval_retrieval(hard)
+        h = eval_retrieval(hard, retriever=R)
         print(f"  hit@1={h['hit@1']}  hit@3={h['hit@3']}  hit@5={h['hit@5']}  mrr={h['mrr']}")
         for q in h["misses"]:
             print(f"    MISS: {q[:70]}")
@@ -171,12 +176,12 @@ def main():
         print("\n(retrieval-only: faithfulness + refusal skipped)")
         return
 
-    ff = eval_faithfulness(easy)
+    ff = eval_faithfulness(easy, retriever=R)
     print(f"\nFAITHFULNESS(easy)  mean={ff['mean']}  graded={ff['graded']}/{len(easy)}  errs={ff['api_errors']}")
 
     refuse = load_set(REFUSE, MIN_REFUSE, "out-of-corpus questions")
     if refuse:
-        rf = eval_refusal(refuse)
+        rf = eval_refusal(refuse, retriever=R)
         print(f"\nREFUSAL  correct={rf['refusal_rate']}  n={rf['n']}  errs={rf['api_errors']}")
         for d in rf["detail"]:
             if not d["ok"]:
