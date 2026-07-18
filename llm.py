@@ -1,3 +1,10 @@
+"""
+llm.py — M5 (generate). Thin wrapper around the OpenAI API.
+
+Loads OPENAI_API_KEY from .env and exposes generate(prompt, system=..., model=...),
+used by rag.py to turn retrieved chunks into a grounded answer. The generator and
+the eval's faithfulness judge pass different model names through the same call.
+"""
 import os
 import time
 

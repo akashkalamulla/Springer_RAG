@@ -9,8 +9,14 @@ __pycache__/
 *.py[cod]
 *.egg-info/
 
+# ── Claude Code local state ──────────────────────────────
+.claude/
+
 # ── Derived artifacts (rebuilt by build_index.py; don't version data) ──
 chunks.jsonl
+
+# ── scraped data / PDFs / models — never commit ──────────
+*.pdf
 
 # ── Editor / OS ──────────────────────────────────────────
 .vscode/
