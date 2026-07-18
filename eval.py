@@ -44,11 +44,21 @@ def eval_retrieval(rows, k=TOP_K):
 def judge(question, answer_text, hits):
     context = "\n\n".join(f"[{h['doi']}] {h['text']}" for h in hits)
     prompt = (
-        "Grade whether the ANSWER is fully supported by the CONTEXT.\n"
-        'Return ONLY JSON: {"score": <0.0-1.0>, "unsupported": [<claims not in context>]}.\n'
-        "1.0 = every claim grounded; subtract for each unsupported claim.\n\n"
-        f"CONTEXT:\n{context}\n\nQUESTION: {question}\n\nANSWER: {answer_text}\n\nJSON:"
-    )
+            "You are grading FAITHFULNESS only: is every factual claim the ANSWER "
+            "asserts supported by the CONTEXT? Do not grade completeness or correctness.\n"
+            "Apply these rules strictly:\n"
+            "1. If the ANSWER states that some information is not in the context, that is "
+            "FULLY faithful. Do not list it as unsupported and do not lower the score for it.\n"
+            "2. Facts that appear in the QUESTION are given. If the ANSWER restates them, "
+            "that is NOT an unsupported claim.\n"
+            "3. Only list a claim as unsupported if the ANSWER asserts it as fact AND it is "
+            "absent from the CONTEXT.\n"
+            'Return ONLY JSON: {"score": <0.0-1.0>, "unsupported": [<ungrounded claims>]}.\n'
+            "score 1.0 = every asserted claim is grounded, or the answer correctly says the "
+            "information is absent. Subtract only for genuinely ungrounded assertions.\n\n"
+            f"CONTEXT:\n{context}\n\nQUESTION: {question}\n\nANSWER: {answer_text}\n\nJSON:"
+        )
+
     raw = generate(prompt, model=JUDGE_MODEL, temperature=0.0)
     raw = raw.removeprefix("```json").removeprefix("```").removesuffix("```").strip()
     try:

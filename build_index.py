@@ -101,6 +101,49 @@ def chunk_article(article: dict):
     flush()
     return chunks
 
+def abstract_chunks(article: dict):
+    """~TARGET_TOKENS chunk(s) from the English abstract.
+
+    BMC abstracts carry the headline facts (sample size, country/setting, key
+    results) that the body prose often states only in a table, or not at all.
+    The body loop never sees `english_abstract`, so those facts were unretrievable
+    and the model had to refuse or invent them. Same window-aware packing as the
+    body, so no chunk blows MiniLM's 256-token window.
+    """
+    text = (article.get("english_abstract") or "").strip()
+    if not text:
+        return []
+    doi = article.get("doi", "") or ""
+
+    # scraper joins abstract lines with "\n"; split to lines, then sentence-split
+    # any line over the window — the same rule body units follow.
+    units = []
+    for line in text.split("\n"):
+        line = line.strip()
+        if not line:
+            continue
+        if approx_tokens(line) <= TARGET_TOKENS:
+            units.append(line)
+        else:
+            units += [s.strip() for s in sentence_split(line) if s.strip()]
+
+    chunks, buf = [], []
+    def flush():
+        if buf:
+            chunks.append({
+                "doi": doi,
+                "section_title": "Abstract",
+                "text": " ".join(buf).strip(),
+                "cited_refs": [],
+            })
+            buf.clear()
+    for u in units:
+        if buf and approx_tokens(" ".join(buf + [u])) > TARGET_TOKENS:
+            flush()
+        buf.append(u)
+    flush()
+    return chunks
+
 def embed_chunks(all_chunks):
     """M2: embed each chunk's text with MiniLM. Returns an (N, 384) array,
     row-aligned to all_chunks. Vectors are unit-normalized by the model, so
@@ -178,7 +221,7 @@ def main():
 
     all_chunks = []
     for a in articles:
-        cs = chunk_article(a)
+        cs = abstract_chunks(a) + chunk_article(a)   # abstract first, then body
         for i, c in enumerate(cs):
             c["chunk_id"] = f"{c['doi']}::{i}"   # stable, DOI-scoped
         all_chunks += cs
